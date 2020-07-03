@@ -8,18 +8,19 @@
 			@if(session('status'))
 				<p class="alert alert-success">{{ session('status') }}</p>
 			@endif
-				<legend>Create new {{ $title }}</legend>
+				<legend>{{ $title }}</legend>
 
 				<div class="bmd-form-group">
-					<label for="name" class="bmd-label-static col-lg-12 col-form-label col-form-label-sm">Name</label>
+					<label for="title" class="bmd-label-static col-lg-12 col-form-label col-form-label-sm">Title</label>
 					<div class="col-lg-12">
-						<input name="name" type="text" id="name" class="form-control" placeholder="Name">
+						<input name="title" type="text" id="title" class="form-control" placeholder="Title">
 					</div>
 				</div>
 				<div class="bmd-form-group">
-					<label for="label" class="bmd-label-static col-lg-12 col-form-label col-form-label-sm">Display name</label>
+					<label for="content" class="bmd-label-static col-lg-12">Content</label>
 					<div class="col-lg-12">
-						<input name="label" type="text" id="label" class="form-control" placeholder="Display name">
+						<textarea name="content" id="content" class="form-control" rows="3" placeholder="Content"></textarea>
+						<span class="form-text text-muted small">{{ $description }}</span>
 					</div>
 				</div>
 				<div class="bmd-form-group">

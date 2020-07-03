@@ -24,7 +24,10 @@
 					<th class="align-middle" scope="row">{{ $user->id }}</th>
 					<td class="align-middle">{{ $user->name }}</td>
 					<td class="align-middle">{{ $user->email }}</td>
-					<td class="align-middle {{ $user->status ? 'badge badge-primary' : 'badge badge-danger'}}">{{ $user->status ? 'Active' : 'Inactive' }}</td>
+					<td class="align-middle">
+						<span class="badge badge-{{ $user->status ? 'success' : 'danger' }}">{{ $user->status ? 'Active' : 'Inactive' }}
+						</span>
+					</td>
 					<td class="align-middle">{{ formatedDate($user->created_at) }}</td>
 				</tr>
 			@empty

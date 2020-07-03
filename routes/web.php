@@ -27,6 +27,12 @@ Route::group(['middleware' => 'auth'], function () {
 	// Route::delete('/tickets/{ticket}', 		'TicketsController@destroy');
 	Route::resource('tickets', 'TicketsController');
 
+	Route::get('/posts', 		'PostsController@index');
+	Route::get('/posts/create', 'PostsController@create');
+	Route::get('/posts/{post}', 'PostsController@show');
+	Route::post('/posts', 		'PostsController@store');
+	Route::patch('/posts/{post}','PostsController@update');
+
 	Route::post('/comments/{ticket}', 		'CommentsController@store');
 });
 
@@ -43,15 +49,13 @@ Route::group([
 	Route::get('/roles/{role}/edit', 'RolesController@edit');
 	Route::post('/roles', 'RolesController@store');
 
-	Route::get('/abilities', 'AbilitiesController@index');
+	Route::get('/abilities', 'AbilitiesController@index')->middleware('can:view_dashboard');
 	Route::get('/abilities/create', 'AbilitiesController@create');
 	Route::post('/abilities', 'AbilitiesController@store');
 
-	Route::get('/posts', 		'PostsController@index');
-	Route::get('/posts/create', 'PostsController@create');
-	Route::get('/posts/{post}', 'PostsController@show');
-	Route::post('/posts', 		'PostsController@store');
-	Route::patch('/posts/{post}','PostsController@update');
+	Route::get('/categories',		'CategoriesController@index');
+	Route::get('/categories/create','CategoriesController@create');
+	Route::post('/categories',		'CategoriesController@store');
 
 });
 

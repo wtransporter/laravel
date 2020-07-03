@@ -46,6 +46,26 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card mt-2">
+				  <h5 class="card-header">Manage Posts</h5>
+				  <div class="card-body">
+				    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+				    <a href="/posts" class="btn btn-primary">All Posts</a>
+				  </div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card mt-2">
+				  <h5 class="card-header">Manage Categories</h5>
+				  <div class="card-body">
+				    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+				    <a href="/admin/categories" class="btn btn-primary">All Categories</a>
+				  </div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
