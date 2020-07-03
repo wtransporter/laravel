@@ -53,7 +53,7 @@ Route::group([
 	Route::get('/abilities/create', 'AbilitiesController@create');
 	Route::post('/abilities', 'AbilitiesController@store');
 
-	Route::get('/categories',		'CategoriesController@index');
+	Route::get('/categories',		'CategoriesController@index')->middleware('can:view_dashboard');
 	Route::get('/categories/create','CategoriesController@create');
 	Route::post('/categories',		'CategoriesController@store');
 
