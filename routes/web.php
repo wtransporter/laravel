@@ -47,6 +47,11 @@ Route::group([
 	Route::get('/abilities/create', 'AbilitiesController@create');
 	Route::post('/abilities', 'AbilitiesController@store');
 
+	Route::get('/posts', 		'PostsController@index');
+	Route::get('/posts/create', 'PostsController@create');
+	Route::get('/posts/{post}', 'PostsController@show');
+	Route::post('/posts', 		'PostsController@store');
+	Route::patch('/posts/{post}','PostsController@update');
 
 });
 
