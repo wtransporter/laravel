@@ -28,4 +28,14 @@ class Post extends Model
     {
     	return 'slug';
     }
+
+    public function activate()
+    {
+        $this->update(['activated' => true]);
+    }
+
+    public function deactivate()
+    {
+        $this->update(['activated' => false]);
+    }
 }

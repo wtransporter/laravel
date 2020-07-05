@@ -9,7 +9,7 @@ class PagesController extends Controller
 {
     public function home()
     {
-    	$posts = Post::where('activated', 1)->paginate(10);
+    	$posts = Post::where('activated', 1)->paginate(5);
     	return view('home', compact('posts'));
     }
 

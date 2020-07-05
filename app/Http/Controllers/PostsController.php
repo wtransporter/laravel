@@ -12,9 +12,12 @@ class PostsController extends Controller
     public function index()
     {
     	if (currentUser()->hasRole('moderator')) {
-    		$posts = Post::all();
+    		$posts = Post::paginate(10);
     	} else {
-    		$posts = Post::where('activated', 1)->get();
+    		$posts = Post::where([
+    				'activated' => 1,
+    				'user_id' => currentUser()->id
+    			])->paginate(10);;
     	}
 
     	return view('admin.posts.index', compact('posts'));
@@ -44,9 +47,9 @@ class PostsController extends Controller
     		'title' => request('title'),
     		'content' => request('content')
     	];
-
-    	$post->update($attributes);
-    	$post->categories()->sync(request('categories'));
+		
+		$post->update($attributes);
+		$post->categories()->sync(request('categories'));
 
     	return redirect($post->path())->with('status', 'Post updated successfuly');
     }
@@ -76,7 +79,7 @@ class PostsController extends Controller
 
     	$post->categories()->sync(request('categories'));
 
-    	return redirect('/posts/create')->with('status', 'Post Created successfuly !');
+    	return redirect('/posts')->with('status', 'Post Created successfuly !');
     }
 
     public function destroy(Post $post)

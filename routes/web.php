@@ -27,14 +27,17 @@ Route::group(['middleware' => 'auth'], function () {
 	// Route::delete('/tickets/{ticket}', 		'TicketsController@destroy');
 	Route::resource('tickets', 'TicketsController');
 
-	Route::get('/posts', 		'PostsController@index');
-	Route::get('/posts/create', 'PostsController@create');
-	Route::get('/posts/{post}', 'PostsController@show');
-	Route::get('/posts/{post}/edit', 'PostsController@edit');
-	Route::patch('/posts/{post}','PostsController@update');
-	Route::post('/posts', 		'PostsController@store');
-	Route::delete('/posts/{post}','PostsController@destroy');
+	// Route::get('/posts', 		'PostsController@index');
+	// Route::get('/posts/create', 'PostsController@create');
+	// Route::get('/posts/{post}', 'PostsController@show');
+	// Route::get('/posts/{post}/edit', 'PostsController@edit');
+	// Route::patch('/posts/{post}','PostsController@update');
+	// Route::post('/posts', 		'PostsController@store');
+	// Route::delete('/posts/{post}','PostsController@destroy');
 
+	Route::resource('posts', 'PostsController');
+
+	Route::patch('/status/{post}','Admin\PostsActivationController@update');
 	Route::post('/comments/{ticket}', 		'CommentsController@store');
 });
 
