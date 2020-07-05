@@ -36,7 +36,6 @@
 	                    <form class="m-0" action="{{ $post->path() }}" method="post">
 	                        @method('PATCH')
 	                        @csrf
-
 							<input class="align-middle" name="activated" type="checkbox" 
                                     onChange="this.form.submit()" {{ $post->activated ? 'checked' : '' }}>
 

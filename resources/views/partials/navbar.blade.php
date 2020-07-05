@@ -11,13 +11,17 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ url('/about') }}">About</a>
           </li>
+          @if(Auth::check())
           <li class="nav-item">
             <a class="nav-link" href="{{ url('/tickets/create') }}">Contact</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url('/tickets') }}">Tickets</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/posts') }}">Posts</a>
           </li> 
-                         
+          @endif
         </ul>
         <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->

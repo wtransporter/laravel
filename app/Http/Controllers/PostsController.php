@@ -25,6 +25,32 @@ class PostsController extends Controller
     	return view('admin.posts.show', compact('post'));
     }
 
+    public function edit(Post $post)
+    {
+    	$categories = Category::all();
+    	$selectedCategories = $post->categories()->pluck('name')->toArray();
+    	return view('admin.posts.edit', compact('post','selectedCategories','categories'));
+    }
+
+    public function update(Post $post)
+    {
+    	request()->validate([
+    		'title' => 'required',
+    		'content' => 'required',
+    		'categories' => 'required'
+    	]);
+
+    	$attributes = [
+    		'title' => request('title'),
+    		'content' => request('content')
+    	];
+
+    	$post->update($attributes);
+    	$post->categories()->sync(request('categories'));
+
+    	return redirect($post->path())->with('status', 'Post updated successfuly');
+    }
+
     public function create()
     {
     	$categories = Category::all();
@@ -36,7 +62,7 @@ class PostsController extends Controller
     	request()->validate([
     		'title' => 'required',
     		'content' => 'required',
-    		'categories' => 'requred'
+    		'categories' => 'required'
     	]);
 
     	$post = new Post([
