@@ -20,6 +20,7 @@
 					<th scope="col">Status</th>
 					<th scope="col"></th>
 					<th scope="col">Created At</th>
+					<th scope="col">Actions</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -42,6 +43,7 @@
 						</form>
 					</td>
 					<td class="align-middle">{{ formatedDate($post->created_at) }}</td>
+					<td class="align-middle"><a href="/posts/{{ $post->slug }}" class="btn btn-primary">Show</a></td>
 				</tr>
 			@empty
 				<p class="alert alert-default">No posts yet !</p>

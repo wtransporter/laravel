@@ -60,8 +60,8 @@ class User extends Authenticatable
         if(is_string($role)){
             $role = Role::whereName($role)->firstOrFail();
         }
-        //$this->roles()->sync($role, false);
-        $this->roles()->save($role);
+        $this->roles()->sync($role, false);
+        //$this->roles()->save($role);
     }
 
     public function hasRole($name)
@@ -72,5 +72,10 @@ class User extends Authenticatable
     public function abilities()
     {
         return $this->roles->map->abilities->flatten()->pluck('name')->unique();
+    }
+
+    public function isAdmin()
+    {
+        return $this->hasRole('moderator');
     }
 }

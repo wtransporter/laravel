@@ -11,12 +11,12 @@ class Post extends Model
 
     public function owner()
     {
-    	return $this->belongsTo(User::class);
+    	return $this->belongsTo(User::class, 'user_id');
     }
 
     public function path()
     {
-    	return '/posts/'.$this->id;
+    	return '/posts/'.$this->slug;
     }
 
     public function categories()

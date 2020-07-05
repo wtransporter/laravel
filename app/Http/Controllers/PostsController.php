@@ -11,8 +11,18 @@ class PostsController extends Controller
 {
     public function index()
     {
-    	$posts = Post::all();
+    	if (currentUser()->hasRole('moderator')) {
+    		$posts = Post::all();
+    	} else {
+    		$posts = Post::where('activated', 1)->get();
+    	}
+
     	return view('admin.posts.index', compact('posts'));
+    }
+
+    public function show(Post $post)
+    {
+    	return view('admin.posts.show', compact('post'));
     }
 
     public function create()
@@ -26,7 +36,7 @@ class PostsController extends Controller
     	request()->validate([
     		'title' => 'required',
     		'content' => 'required',
-    		'category' => 'requred'
+    		'categories' => 'requred'
     	]);
 
     	$post = new Post([
@@ -41,5 +51,15 @@ class PostsController extends Controller
     	$post->categories()->sync(request('categories'));
 
     	return redirect('/posts/create')->with('status', 'Post Created successfuly !');
+    }
+
+    public function destroy(Post $post)
+    {
+    	
+    	$this->authorize('manage', $post);
+
+    	$post->delete();
+
+    	return redirect('/posts')->with('status', 'Post deleted successfuly !');
     }
 }
