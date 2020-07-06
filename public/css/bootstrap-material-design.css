@@ -423,6 +423,8 @@ mark,
   color: #6c757d; }
 
 code {
+  background-color: #f5f7fa;
+  padding: 1px 2px 2px;
   font-size: 87.5%;
   color: #e91e63;
   word-break: break-word; }

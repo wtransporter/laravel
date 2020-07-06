@@ -13,7 +13,9 @@
 <div class="card mt-2">
 	<h5 class="card-header bg-light">{{ $post->title }}</h5>
 	<div class="card-body">
-		<p class="card-text">{{ $post->content }}</p>
+		<p class="card-text">
+			{!! $post->content !!}
+		</p>
 	</div>
 	<div class="card-footer d-flex flex-row align-items-start">
 		<div class="px-1">

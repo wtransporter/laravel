@@ -38,4 +38,9 @@ class Post extends Model
     {
         $this->update(['activated' => false]);
     }
+
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'ticket');
+    }
 }

@@ -4,10 +4,16 @@
 
 <div class="container col-md-8 col-md-offset-2">
 	<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">{{ $post->title }}</h5>
-			<p><strong>Status </strong>{{ $post->status ? 'Published' : 'Pending' }} - {{ $post->owner->name }}</p>
-			<p class="card-text">{{ $post->content }}</p>
+		<div class="card-header card-title">
+			<span class="h5">{{ $post->title }}</span>
+			<div class="float-right"><strong>Status </strong>
+				<span class="badge badge-{{ $post->activated ? 'success' : 'danger' }}">
+					{{ $post->status ? 'Published' : 'Pending' }}
+				</span> - Author: {{ $post->owner->name }}
+			</div>
+		</div>
+		<div class="card-body">			
+			<p class="card-text">{!! $post->content !!}</p>
 		</div>
 		@php
 
@@ -28,6 +34,13 @@
 		</div>
 		@endcan
 	</div>
+	@foreach($post->comments as $comment)
+	<div class="card">
+		<div class="card-header card-title">
+			<p>{{ $comment->content }}</p>
+		</div>
+	</div>
+	@endforeach
 </div>
 
 @endsection

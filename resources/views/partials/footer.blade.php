@@ -4,3 +4,6 @@
         <a href="#">Back to top</a>
       </p>
 </footer>
+
+<script src={{ asset('js/highlight.pack.js') }}></script>
+<script>hljs.initHighlightingOnLoad();</script>

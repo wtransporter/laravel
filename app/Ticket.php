@@ -14,9 +14,14 @@ class Ticket extends Model
     	return $this->belongsTo(User::class, 'user_id');
     }
 
+    // public function comments()
+    // {
+    // 	return $this->hasMany(Comment::class, 'ticket_id');
+    // }
+
     public function comments()
     {
-    	return $this->hasMany(Comment::class, 'ticket_id');
+        return $this->morphMany('App\Comment', 'ticket');
     }
 
     public function addComment($content)

@@ -12,7 +12,7 @@ class PostsController extends Controller
     public function index()
     {
     	if (currentUser()->hasRole('moderator')) {
-    		$posts = Post::paginate(10);
+    		$posts = Post::latest()->paginate(10);
     	} else {
     		$posts = Post::where([
     				'activated' => 1,
@@ -45,7 +45,7 @@ class PostsController extends Controller
 
     	$attributes = [
     		'title' => request('title'),
-    		'content' => request('content')
+    		'content' => hlString(request('content'))
     	];
 		
 		$post->update($attributes);
@@ -67,14 +67,14 @@ class PostsController extends Controller
     		'content' => 'required',
     		'categories' => 'required'
     	]);
-
+    	
     	$post = new Post([
     		'user_id' => currentUser()->id,
     		'title' => request('title'),
-    		'content' => request('content'),
+    		'content' => hlString(request('content')),
     		'slug' => uniqid()
     	]);
-
+    	
     	$post->save();
 
     	$post->categories()->sync(request('categories'));
