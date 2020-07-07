@@ -30,7 +30,7 @@
 				<div class="bmd-form-group">
 					<label for="content" class="bmd-label-static col-lg-12">Content</label>
 					<div class="col-lg-12">
-						<textarea name="content" id="content" class="form-control" rows="30" placeholder="Content">{{ $post->content }}</textarea>
+						<textarea name="content" id="content" class="form-control" rows="30" placeholder="Content" wrap="hard">{{ $post->content }}</textarea>
 					</div>
 				</div>
 				<div class="bmd-form-group">

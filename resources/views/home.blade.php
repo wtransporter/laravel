@@ -17,11 +17,18 @@
 			{!! $post->content !!}
 		</p>
 	</div>
-	<div class="card-footer d-flex flex-row align-items-start">
+	<div class="card-footer d-flex flex-row justify-content-between">
 		<div class="px-1">
 			<span class="badge badge-info">Author: {{ $post->owner->name }} created at: {{ formatedDate($post->created_at) }}</span>
-			<p>@foreach($post->categories as $category) <span class="badge badge-primary">{{ $category->name }}</span> @endforeach</p>
+			<p>@foreach($post->categories as $category) <a href="" class="badge badge-primary"><span >{{ $category->name }}</span></a>@endforeach</p>
 		</div>
+		@if(Auth::check())
+			@if(Auth::user()->hasRole('moderator'))
+			<div class="px-1">
+				<a href="{{ $post->path().'/edit' }}" class="btn btn-outline-danger btn-sm">Edit</a>
+			</div>
+			@endif
+		@endif
 	</div>
 </div>
 @empty
