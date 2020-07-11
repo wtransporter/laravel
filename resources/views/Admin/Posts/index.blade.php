@@ -3,6 +3,14 @@
 @section('content')
 
 <div class="card">
+	<div class="card-header d-flex justify-content-between align-items-center">
+		<div>
+			<span class="card-title h5">Post list</span>
+		</div>
+		<div>
+			<a href="/posts/create" class="btn btn-outline-primary">Create</a>
+		</div>
+	</div>
 	<div class="card-body">
 		@foreach($errors->all() as $error)
 			<p class="alert alert-danger">{{ $error }}</p>
@@ -57,7 +65,7 @@
 		</div>
 		{{ $posts->links() }}
 	</div>
-	@include('includes.btn_create', ['path' => 'posts/create'])
+	{{-- @include('includes.btn_create', ['path' => 'posts/create']) --}}
 </div>
 
 @endsection

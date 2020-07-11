@@ -45,7 +45,7 @@
 				</div>
 				<div class="bmd-form-group">
 					<div class="col-lg-10 col-lg-offset-2">
-						<button class="btn btn-secondary">Cancel</button>
+						<a href="/posts" class="btn btn-secondary">Cancel</a>
 						<button type="submit" class="btn btn-primary">SUBMIT</button>
 					</div>
 				</div>

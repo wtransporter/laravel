@@ -17,6 +17,7 @@ Route::get('/', 		'PagesController@home');
 
 Route::get('/about', 	'PagesController@about');
 
+Route::resource('posts', 'PostsController');
 //Route::get('/posts/{post}', 'PostsController@show');
 
 Route::group(['middleware' => 'auth'], function () {
@@ -36,8 +37,6 @@ Route::group(['middleware' => 'auth'], function () {
 	// Route::patch('/posts/{post}','PostsController@update');
 	// Route::post('/posts', 		'PostsController@store');
 	// Route::delete('/posts/{post}','PostsController@destroy');
-
-	Route::resource('posts', 'PostsController');
 
 	Route::patch('/status/{post}','Admin\PostsActivationController@update');
 	Route::post('/comments/{ticket}', 		'CommentsController@store');
