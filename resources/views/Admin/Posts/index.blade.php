@@ -57,7 +57,7 @@
 		</div>
 		{{ $posts->links() }}
 	</div>
-	@include('includes.btn_create', ['path' => '/posts/create'])
+	@include('includes.btn_create', ['path' => 'posts/create'])
 </div>
 
 @endsection

@@ -2,13 +2,12 @@
 
 @section('content')
 
-<div class="container col-md-8 col-md-offset-2">
 	<div class="card">
 		<div class="card-header card-title">
 			<span class="h5">{{ $post->title }}</span>
 			<div class="float-right"><strong>Status </strong>
 				<span class="badge badge-{{ $post->activated ? 'success' : 'danger' }}">
-					{{ $post->status ? 'Published' : 'Pending' }}
+					{{ $post->activated ? 'Published' : 'Pending' }}
 				</span> - Author: {{ $post->owner->name }}
 			</div>
 		</div>
@@ -41,6 +40,5 @@
 		</div>
 	</div>
 	@endforeach
-</div>
 
 @endsection

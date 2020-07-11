@@ -17,6 +17,8 @@ Route::get('/', 		'PagesController@home');
 
 Route::get('/about', 	'PagesController@about');
 
+//Route::get('/posts/{post}', 'PostsController@show');
+
 Route::group(['middleware' => 'auth'], function () {
 	// Route::get('/tickets', 			'TicketsController@index');
 	// Route::get('/tickets/create', 	'TicketsController@create');
@@ -29,7 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	// Route::get('/posts', 		'PostsController@index');
 	// Route::get('/posts/create', 'PostsController@create');
-	// Route::get('/posts/{post}', 'PostsController@show');
+	
 	// Route::get('/posts/{post}/edit', 'PostsController@edit');
 	// Route::patch('/posts/{post}','PostsController@update');
 	// Route::post('/posts', 		'PostsController@store');

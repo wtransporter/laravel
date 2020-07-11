@@ -13,9 +13,14 @@
 <div class="card mt-2">
 	<h5 class="card-header bg-light">{{ $post->title }}</h5>
 	<div class="card-body">
-		<p class="card-text">
-			{!! $post->content !!}
+		<p class="card-text">			
+			{!! substr($post->content,0,strpos($post->content,'</pre>')+5) !!}
 		</p>
+		@if(strlen($post->content)>strpos($post->content,'</pre>')+6)
+			<div class="px-1">
+				<a href="{{ $post->path() }}" class="btn btn-outline-primary btn-sm">Read more ...</a>
+			</div>
+		@endif
 	</div>
 	<div class="card-footer d-flex flex-row justify-content-between">
 		<div class="px-1">
