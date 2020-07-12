@@ -9,7 +9,11 @@ class PagesController extends Controller
 {
     public function home()
     {
-    	$posts = Post::where('activated', 1)->latest()->paginate(5);
+    	$posts = Post::with('categories')
+    		->with('owner')
+    		->where('activated', 1)
+    		->latest()
+    		->paginate(5);
     	return view('home', compact('posts'));
     }
 

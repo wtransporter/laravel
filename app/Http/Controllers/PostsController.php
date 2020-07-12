@@ -30,7 +30,7 @@ class PostsController extends Controller
 
     public function edit(Post $post)
     {
-    	$this->middleware('auth');
+    	$this->authorize('manage', $post);
         $categories = Category::all();
     	$selectedCategories = $post->categories()->pluck('name')->toArray();
     	return view('admin.posts.edit', compact('post','selectedCategories','categories'));
@@ -57,7 +57,8 @@ class PostsController extends Controller
 
     public function create()
     {
-    	$categories = Category::all();
+    	$this->authorize('manage');
+        $categories = Category::all();
     	return view('admin.posts.create', compact('categories'));
     }
 

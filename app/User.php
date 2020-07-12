@@ -8,6 +8,7 @@ use App\Ticket;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -67,6 +68,8 @@ class User extends Authenticatable
     public function hasRole($name)
     {
         return $this->roles()->pluck('name')->contains($name);
+        // $user = $this->with('roles')->find(Auth::user()->id);
+        // return $user->roles->contains('name', $name);
     }
 
     public function abilities()
