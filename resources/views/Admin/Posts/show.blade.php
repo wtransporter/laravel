@@ -29,7 +29,7 @@
 		<div class="card-footer d-flex flex-row">			
 			<div class="col-lg-10">
 				<span class="badge badge-info">Author: {{ $post->owner->name }} created at: {{ formatedDate($post->created_at) }}</span>
-				<p>@foreach($post->categories as $category) <a href="" class="badge badge-primary"><span >{{ $category->name }}</span></a>@endforeach</p>
+				<p>@foreach($post->categories as $category) <a href="/categories/{{ $category->id }}/posts" class="badge badge-primary"><span >{{ $category->name }}</span></a>@endforeach</p>
 			</div>
 			@can('manage', $post)
 				<div class="col-lg-2 d-flex justify-content-between">

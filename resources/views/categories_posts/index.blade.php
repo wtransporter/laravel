@@ -1,7 +1,12 @@
 @extends('layout.app')
 
 @section('content')
-
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="/">Home</a></li>
+	    <li class="breadcrumb-item active">{{ $categoryName }}</li>
+	  </ol>
+	</nav>
 @foreach($errors->all() as $error)
 	<p class="alert alert-danger">{{ $error }}</p>
 @endforeach
@@ -39,13 +44,14 @@
 	<div class="card-footer d-flex flex-row justify-content-between">
 		<div class="px-1">
 			<span class="badge badge-info">Author: {{ $post->owner->name }} created at: {{ formatedDate($post->created_at) }}</span>
-			<p>@foreach($post->categories as $category) <a href="/categories/{{$category->id}}/posts" class="badge badge-primary"><span >{{ $category->name }}</span></a>@endforeach</p>
+			<p><span class="badge badge-primary"><span >{{ $categoryName }}</span></span>
+			</p>
 		</div>
 		@if(Auth::check() && (isModerator() || (Auth::user()->id == $post->owner->id)))
 			<div class="px-1">
 				<a href="{{ $post->path().'/edit' }}" class="btn btn-outline-danger btn-sm">Edit</a>
 			</div>
-		@endcan
+		@endif
 	</div>
 </div>
 @empty
