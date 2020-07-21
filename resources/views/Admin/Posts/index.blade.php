@@ -18,6 +18,9 @@
 		@if(session('status'))
 			<p class="alert alert-success">{{ session('status') }}</p>
 		@endif
+		@php
+			$isModerator = isModerator();
+		@endphp
 		<h5 class="card-title">Post list</h5>
 		<div class="table-responsive">
 			<table class="table table-sm">
@@ -43,7 +46,7 @@
 							<span class="badge badge-{{ $post->activated ? 'success' : 'danger' }}">{{ $post->activated ? 'Active' : 'Pending' }}</span>
 							</td>
 						<td class="align-middle">
-		                    @if(Auth::user()->hasRole('moderator'))
+		                    @if($isModerator)
 		                    <form class="m-0" action="/status/{{ $post->slug }}" method="post">
 		                        @method('PATCH')
 		                        @csrf
@@ -54,7 +57,7 @@
 							@endif
 						</td>
 						<td class="align-middle">{{ formatedDate($post->created_at) }}</td>
-						<td class="align-middle">{{ ($post->owner->name) }}</td>
+						<td class="align-middle">{{ $post->owner->name }}</td>
 						<td class="align-middle"><a href="/posts/{{ $post->slug }}" class="btn btn-primary">Show</a></td>
 					</tr>
 				@empty

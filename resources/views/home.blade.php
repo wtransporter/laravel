@@ -9,6 +9,20 @@
 	<p class="alert alert-success">{{ session('status') }}</p>
 @endif
 
+{{-- @php
+	$isModerator = false;
+@endphp
+@if(Auth::check())
+	@foreach(Auth::user()->roles as $role)
+		@if($role->name == 'moderator')
+			@php
+				$isModerator = true;
+				break;
+			@endphp
+		@endif
+	@endforeach
+@endif --}}
+
 @forelse($posts as $post)
 <div class="card mt-2">
 	<h5 class="card-header bg-light">{{ $post->title }}</h5>
@@ -27,11 +41,11 @@
 			<span class="badge badge-info">Author: {{ $post->owner->name }} created at: {{ formatedDate($post->created_at) }}</span>
 			<p>@foreach($post->categories as $category) <a href="" class="badge badge-primary"><span >{{ $category->name }}</span></a>@endforeach</p>
 		</div>
-		@if(Auth::check() && Auth::user()->hasRole('moderator'))
+		@if(Auth::check() && (isModerator() || (Auth::user()->id == $post->owner->id)))
 			<div class="px-1">
 				<a href="{{ $post->path().'/edit' }}" class="btn btn-outline-danger btn-sm">Edit</a>
 			</div>
-		@endif
+		@endcan
 	</div>
 </div>
 @empty

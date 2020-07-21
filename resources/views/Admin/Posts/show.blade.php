@@ -11,7 +11,7 @@
 	<div class="card">
 		<div class="card-header card-title">
 			<span class="h5">{{ $post->title }}</span>
-			@if(Auth::check() && Auth()->user()->hasRole('moderator'))
+			@if(isModerator())
 				<div class="float-right"><strong>Status </strong>
 					<span class="badge badge-{{ $post->activated ? 'success' : 'danger' }}">
 						{{ $post->activated ? 'Published' : 'Pending' }}

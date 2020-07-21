@@ -11,8 +11,8 @@ class PostsController extends Controller
 {
     public function index()
     {
-    	if (currentUser()->hasRole('moderator')) {
-    		$posts = Post::latest()->paginate(10);
+    	if (isModerator()) {
+    		$posts = Post::with('owner')->latest()->paginate(10);
     	} else {
     		$posts = Post::where([
     				'activated' => 1,
@@ -57,7 +57,6 @@ class PostsController extends Controller
 
     public function create()
     {
-    	$this->authorize('manage');
         $categories = Category::all();
     	return view('admin.posts.create', compact('categories'));
     }
