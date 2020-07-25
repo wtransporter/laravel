@@ -34,13 +34,15 @@
 				<div class="bmd-form-group">
 					<label for="categories" class="bmd-label-static col-lg-12">Categories</label>
 					<div class="col-lg-12">
-						<select name="categories[]" id="category" class="form-control" multiple>
+						<select name="categories[]" id="category" 
+							class="mdb-select md-form form-control" multiple>
 						@foreach($categories as $category)
 							<option value="{{ $category->id }}">
 								{{ $category->name }}
 							</option>
 						@endforeach
 						</select>
+
 					</div>
 				</div>
 				<div class="bmd-form-group">

@@ -18,4 +18,5 @@ class CategoriesPostsController extends Controller
     			'categoryName' => $category->name
     		]);
     }
+
 }

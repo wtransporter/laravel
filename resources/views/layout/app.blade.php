@@ -18,7 +18,7 @@
         <script src="{{ asset('js/bootstrap-material-design.js')}}"></script>
         {{-- <script src="{{ asset('js/bootstrap-material-design.min.js')}}"></script> --}}
 
-        <link rel="stylesheet" href="{{asset('css/highlight/styles/monokai-sublime.css')}}">
+        <link rel="stylesheet" href="{{asset('css/highlight/styles/monokai.css')}}">
 
     </head>
     <body>

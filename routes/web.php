@@ -19,7 +19,7 @@ Route::get('/about', 	'PagesController@about');
 
 Route::resource('posts', 'PostsController');
 //Route::get('/posts/{post}', 'PostsController@show');
-Route::get('/categories/{category}/posts',	'CategoriesPostsController@index');
+Route::get('/categories/{category:name}',	'CategoriesPostsController@index');
 
 Route::group(['middleware' => 'auth'], function () {
 	// Route::get('/tickets', 			'TicketsController@index');
@@ -62,8 +62,10 @@ Route::group([
 
 	Route::get('/categories',		'CategoriesController@index')->middleware('can:view_dashboard');
 	Route::get('/categories/create','CategoriesController@create');
+
 	Route::post('/categories',		'CategoriesController@store');
 
 });
 
+	
 	Auth::routes();
