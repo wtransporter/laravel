@@ -9,11 +9,15 @@ class PagesController extends Controller
 {
     public function home()
     {
-    	$posts = Post::with('categories')
-    		->with('owner')
-    		->where('activated', 1)
-    		->latest()
-    		->paginate(5);
+    	// $posts = Post::with('categories')
+    	// 	->with('owner')
+    	// 	->activated()
+    	// 	->latest()
+    	// 	->paginate(5);
+      $posts = Post::activated()
+        ->latest()
+        ->paginate(4);
+        
     	return view('home', compact('posts'));
     }
 
@@ -21,5 +25,5 @@ class PagesController extends Controller
     {
     	return view('about');
     }
-    
+
 }

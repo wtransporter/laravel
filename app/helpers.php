@@ -19,6 +19,12 @@ function isModerator()
 {
 	$isModerator = false;
 
+  // if(Auth::check()){
+  // 	if (Auth::user()->hasRole('Moderator')) {
+  //     $isModerator = true;
+  //   }
+  // }
+
 	if(Auth::check()){
 		foreach(Auth::user()->roles as $role){
 			if($role->name == 'moderator'){

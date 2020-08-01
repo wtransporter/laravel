@@ -6,6 +6,7 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostsController extends Controller
 {
@@ -17,12 +18,13 @@ class PostsController extends Controller
     public function index()
     {
     	if (isModerator()) {
-    		$posts = Post::with('owner')->latest()->paginate(10);
+    		$posts = Post::latest()->paginate(10);
     	} else {
-    		$posts = Post::where([
-    				'activated' => 1,
-    				'user_id' => currentUser()->id
-    			])->paginate(10);;
+        $posts = currentUser()->posts()->activated()->paginate(10);
+    		// $posts = Post::where([
+    		// 		'activated' => 1,
+    		// 		'user_id' => currentUser()->id
+    		// 	])->paginate(10);
     	}
 
     	return view('admin.posts.index', compact('posts'));
@@ -30,7 +32,8 @@ class PostsController extends Controller
 
     public function show(Post $post)
     {
-    	return view('admin.posts.show', compact('post'));
+        // dd($post->owner);
+      return view('admin.posts.show', compact('post'));
     }
 
     public function edit(Post $post)
@@ -53,7 +56,7 @@ class PostsController extends Controller
     		'title' => request('title'),
     		'content' => hlString(request('content'))
     	];
-		
+
 		$post->update($attributes);
 		$post->categories()->sync(request('categories'));
 
@@ -73,14 +76,14 @@ class PostsController extends Controller
     		'content' => 'required',
     		'categories' => 'required'
     	]);
-    	
+
     	$post = new Post([
     		'user_id' => currentUser()->id,
     		'title' => request('title'),
     		'content' => hlString(request('content')),
-    		'slug' => uniqid()
+    		'slug' => Str::slug(request('title'), '-')
     	]);
-    	
+
     	$post->save();
 
     	$post->categories()->sync(request('categories'));
@@ -90,7 +93,7 @@ class PostsController extends Controller
 
     public function destroy(Post $post)
     {
-    	
+
     	$this->authorize('manage', $post);
 
     	$post->delete();

@@ -3,7 +3,7 @@
     <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="#">Laravel</a>
+        <a class="navbar-brand" href="#">{{ config('app.name', 'MyNotes') }}</a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item active">
             <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
@@ -15,7 +15,7 @@
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
               <div class="dropdown-menu">
                 @foreach($categories as $category)
-                    <a class="dropdown-item" 
+                    <a class="dropdown-item"
                         href="/categories/{{$category->name}}">{{ $category->name }}</a>
                 @endforeach
               </div>
@@ -54,7 +54,7 @@
                           @if(Auth::user()->hasRole('moderator'))
                           <a class="dropdown-item" href="/admin">
                               Dashboard
-                          </a>                            
+                          </a>
                           @endif
                         @endif
                         <a class="dropdown-item" href="{{ route('logout') }}"

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Category;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if ($this->app->isLocal()) {
+            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
+        }
     }
 
     /**
@@ -23,12 +26,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if ($this->app->isLocal()) {
-            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
-        }
-
-        \View::composer('*', function ($view) {
-            $view->with('categories', \App\Category::all());
+        \View::composer('*', function($view) {
+            $categories = \Cache::rememberForever('categories', function () {
+                return Category::all();
+            });
+            $view->with('categories', $categories);
         });
     }
 }

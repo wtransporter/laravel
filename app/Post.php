@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
 
-	protected $guarded = ['id'];
+		protected $guarded = ['id'];
+
+		protected $with = ['owner', 'categories'];
 
     public function owner()
     {
@@ -28,6 +30,11 @@ class Post extends Model
     {
     	return 'slug';
     }
+
+		public function scopeActivated($query)
+		{
+				return $query->where('activated', 1);
+		}
 
     public function activate()
     {
