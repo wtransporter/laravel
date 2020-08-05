@@ -14,7 +14,7 @@
 	<h5 class="card-header bg-light">{{ $post->title }}</h5>
 	<div class="card-body">
 		<p class="card-text">
-			{!! substr($post->content,0,strpos($post->content,'</pre>')+5) !!}
+			{!! substr($post->content,0,(strpos($post->content,'</pre>') == 0) ? 350 : strpos($post->content,'</pre>')+5) !!}
 		</p>
 		@if(strlen($post->content)>strpos($post->content,'</pre>')+6)
 			<div class="px-1">
