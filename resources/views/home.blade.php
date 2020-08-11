@@ -8,9 +8,12 @@
 @if(session('status'))
 	<p class="alert alert-success">{{ session('status') }}</p>
 @endif
-
+<div class="table-responsive">
+<table class="table table-sm">
+	<tbody>
 @forelse($posts as $post)
-<div class="card mt-2">
+
+{{-- <div class="card mt-2">
 	<h5 class="card-header bg-light">{{ $post->title }}</h5>
 	<div class="card-body">
 		<p class="card-text">
@@ -33,10 +36,47 @@
 			</div>
 		@endcan
 	</div>
-</div>
+</div> --}}
+
+	<tr>
+		<td class="align-middle">
+			<a style="text-decoration: none;" href="{{ $post->path() }}">
+				{{ $post->title }}
+			</a>
+		</td>
+		<td class="align-middle">
+			{!! trim(substr($post->content,0,90)) !!}...
+		</td>
+		<td class="align-middle">
+			@foreach($post->categories as $category)
+				@php
+					$primary = collect([1, 2, 3]);
+					$info = collect([4, 5, 6]);
+					$warning = collect([7, 8, 9]);
+					if ($primary->contains($category->id)) {
+						$color = 'primary';
+					} elseif ($info->contains($category->id)) {
+						$color = 'info';
+					} elseif ($warning->contains($category->id)) {
+						$color = 'warning';
+					}
+					 else {
+						$color = 'danger';
+					}
+				@endphp
+				<a class="badge badge-{{ $color }} rounded-pill" href="/categories/{{$category->name}}">
+					<span>{{ $category->name }}</span>
+				</a>
+			@endforeach
+		</td>
+	</tr>
+
 @empty
 	<p class="alert alert-default">No posts yet !</p>
 @endforelse
+	</tbody>
+</table>
+</div>
 
 <div class="mt-2">
 	{{ $posts->links() }}

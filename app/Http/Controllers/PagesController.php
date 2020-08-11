@@ -16,7 +16,7 @@ class PagesController extends Controller
     	// 	->paginate(5);
       $posts = Post::activated()
         ->latest()
-        ->paginate(4);
+        ->paginate(20);
         
     	return view('home', compact('posts'));
     }
