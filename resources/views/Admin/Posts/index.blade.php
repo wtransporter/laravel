@@ -42,18 +42,12 @@
 						<th class="align-middle" scope="row">{{ $post->id }}</th>
 						<td class="align-middle">{{ $post->title }}</td>
 						<td class="align-middle">{{ Str::limit($post->content,50) }}</td>
-						<td class="align-middle">
+						{{-- <td class="align-middle">
 							<span class="badge badge-{{ $post->activated ? 'success' : 'danger' }}">{{ $post->activated ? 'Active' : 'Pending' }}</span>
-							</td>
+						</td> --}}
 						<td class="align-middle">
 		                    @if($isModerator)
-		                    <form class="m-0" action="/status/{{ $post->slug }}" method="post">
-		                        @method('PATCH')
-		                        @csrf
-								<input class="align-middle" name="activated" type="checkbox" 
-	                                    onChange="this.form.submit()" {{ $post->activated ? 'checked' : '' }}>
-
-							</form>
+								<toggle-status :data="{{ $post }}"></toggle-status>
 							@endif
 						</td>
 						<td class="align-middle">{{ formatedDate($post->created_at) }}</td>

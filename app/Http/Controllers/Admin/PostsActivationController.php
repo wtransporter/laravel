@@ -10,6 +10,7 @@ class PostsActivationController extends Controller
 {
     public function update(Post $post)
     {
+		// dd(request()->boolean('activated'));
 		if (request()->boolean('activated')) {
 		    $post->activate();
 		    $message = 'Post activated';
@@ -17,6 +18,10 @@ class PostsActivationController extends Controller
 			$post->deactivate();
 			$message = 'Post deactivated';
 		}
+
+		if (request()->wantsJson()) {
+            return response([], 204);
+        }
 
     	return redirect('/posts')->with('status', $message);
     }
