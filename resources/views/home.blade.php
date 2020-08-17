@@ -40,6 +40,12 @@
 
 	<tr>
 		<td class="align-middle">
+			<img class="avatar" style="width: 60px; height: 60px;" 
+				src="{{ file_exists(public_path().'/images/'.$post->categories->random(1)->first()->name.'.png') ? 
+					asset('images').'/'.$post->categories->random(1)->first()->name.'.png' :
+					asset('images').'/Laravel.png'}}">
+		</td>
+		<td class="align-middle">
 			<a style="text-decoration: none;" href="{{ $post->path() }}">
 				{{ $post->title }}
 			</a>

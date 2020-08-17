@@ -27,7 +27,7 @@
 						<input name="title" type="text" id="title" class="form-control" placeholder="Title" value="{{ $post->title }}">
 					</div>
 				</div>
-				<div class="bmd-form-group">
+				<div class="bmd-form-group" v-pre>
 					<label for="content" class="bmd-label-static col-lg-12">Content</label>
 					<div class="col-lg-12">
 						<textarea name="content" id="content" class="form-control" rows="30" placeholder="Content" wrap="hard">{{ $post->content }}</textarea>
