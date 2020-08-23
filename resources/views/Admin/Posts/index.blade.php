@@ -30,7 +30,6 @@
 						<th scope="col">Title</th>
 						<th scope="col">Content</th>
 						<th scope="col">Status</th>
-						<th scope="col"></th>
 						<th scope="col">Created At</th>
 						<th scope="col">Author</th>
 						<th scope="col">Actions</th>
