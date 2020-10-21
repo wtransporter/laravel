@@ -1,5 +1,6 @@
 <?php
 
+use App\Post;
 use App\Role;
 use App\User;
 use App\Ability;
