@@ -1,5 +1,9 @@
 <?php
 
+use App\Role;
+use App\User;
+use App\Ability;
+use App\Category;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -27,19 +31,33 @@ class UserSeeder extends Seeder
 
         DB::table('users')->delete();
 
-        $user = User::create([
+        $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@test.com',
             'password' => Hash::make('12345678')
         ]);
 
-        $user->assignRole('admin');
+        $admin->assignRole('moderator');
 
-        User::create([
+        factory(Category::class, 4)->create()->each(function ($category) use ($admin) {
+            factory(Post::class, 3)->create(['user_id' => $admin->id])
+                ->each(function ($post) use ($category) {
+                    $post->categories()->sync($category);
+                });
+        });
+
+        $member = User::create([
             'name' => 'Member',
             'email' => 'member@test.com',
             'password' => Hash::make('12345678')
         ]);
         
+        Category::all()->each(function ($category) use ($member) {
+            factory(Post::class, 3)->create(['user_id' => $member->id])
+                ->each(function ($post) use ($category) {
+                    $post->categories()->sync($category);
+                });
+        });
+
     }
 }
