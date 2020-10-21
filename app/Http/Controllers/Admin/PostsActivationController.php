@@ -10,7 +10,7 @@ class PostsActivationController extends Controller
 {
     public function update(Post $post)
     {
-		// dd(request()->boolean('activated'));
+
 		if (request()->boolean('activated')) {
 		    $post->activate();
 		    $message = 'Post activated';

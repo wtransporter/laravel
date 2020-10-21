@@ -7,13 +7,11 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
-    public function home()
+	/**
+	 * Display list of active posts on home page
+	 */
+	public function home()
     {
-    	// $posts = Post::with('categories')
-    	// 	->with('owner')
-    	// 	->activated()
-    	// 	->latest()
-    	// 	->paginate(5);
     	$posts = Post::activated()
 			->latest()
 			->paginate(20);
@@ -21,7 +19,10 @@ class PagesController extends Controller
     	return view('home', compact('posts'));
     }
 
-    public function about()
+	/**
+	 * Display about page
+	 */
+	public function about()
     {
     	return view('about');
     }

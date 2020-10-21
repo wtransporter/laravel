@@ -44,7 +44,6 @@ class TicketsController extends Controller
     public function edit(Ticket $ticket)
     {
         $this->authorize('manage', $ticket);
-        //abort_if(! currentUser()->can('manage', $ticket), 403);
         
         return view('tickets.edit', ['ticket' => $ticket]);
     }

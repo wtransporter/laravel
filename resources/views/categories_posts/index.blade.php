@@ -14,28 +14,25 @@
 	<p class="alert alert-success">{{ session('status') }}</p>
 @endif
 
-{{-- @php
-	$isModerator = false;
-@endphp
-@if(Auth::check())
-	@foreach(Auth::user()->roles as $role)
-		@if($role->name == 'moderator')
-			@php
-				$isModerator = true;
-				break;
-			@endphp
-		@endif
-	@endforeach
-@endif --}}
+
 
 @forelse($posts as $post)
 <div class="card mt-2">
 	<h5 class="card-header bg-light">{{ $post->title }}</h5>
 	<div class="card-body">
 		<p class="card-text">			
-			{!! substr($post->content,0,strpos($post->content,'</pre>')+5) !!}
+			<?php
+				if (strpos($post->content,'</pre>')) {
+					$length = strpos($post->content,'</pre>')+5;
+				} elseif (strpos($post->content,'</code>')) {
+					$length = strpos($post->content,'</code>')+7;
+				} else {
+					$length = strlen($post->content) < 300 ? strlen($post->content) : 300;
+				}
+			?>
+			{!! substr($post->content,0,$length) !!}
 		</p>
-		@if(strlen($post->content)>strpos($post->content,'</pre>')+6)
+		@if(strlen($post->content)>$length+1)
 			<div class="px-1">
 				<a href="{{ $post->path() }}" class="btn btn-outline-primary btn-sm">Read more ...</a>
 			</div>

@@ -46,7 +46,6 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        // dd($post->owner);
       return view('admin.posts.show', compact('post'));
     }
 
@@ -58,9 +57,11 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-    	$this->authorize('manage', $post);
+        $this->authorize('manage', $post);
+        
         $categories = Category::all();
-    	$selectedCategories = $post->categories()->pluck('name')->toArray();
+        $selectedCategories = $post->categories()->pluck('name')->toArray();
+        
     	return view('admin.posts.edit', compact('post','selectedCategories','categories'));
     }
 
@@ -96,6 +97,12 @@ class PostsController extends Controller
     	return view('admin.posts.create', compact('categories'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Requests\PostUpdateFormRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(PostUpdateFormRequest $request)
     {
     	$post = Post::create([
@@ -105,7 +112,7 @@ class PostsController extends Controller
     		'slug' => Str::slug($request->title, '-')
     	]);
 
-    	$post->categories()->sync(request('categories'));
+    	$post->categories()->sync($request->categories);
 
     	return redirect('/posts')->with('status', 'Post Created successfuly !');
     }
