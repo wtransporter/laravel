@@ -85,7 +85,7 @@
 </div>
 
 <div class="mt-2">
-	{{ $posts->links() }}
+	{{ $posts->withQueryString()->links() }}
 </div>
 
 @endsection

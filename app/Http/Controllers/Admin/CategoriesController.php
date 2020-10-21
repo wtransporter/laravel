@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
+use App\Http\Requests\CategoryStoreRequest;
 
 class CategoriesController extends Controller
 {
@@ -20,14 +21,17 @@ class CategoriesController extends Controller
     	return view('admin.categories.create');
     }
 
-    public function store()
+	/**
+	 * Store a new category instance
+	 * 
+	 * @param CategoryStoreRequest $request
+	 */
+	public function store(CategoryStoreRequest $request)
     {
-  		request()->validate(['name' => 'required']);
-  		
-  		$category = new Category(['name' => request('name')]);
-
   		try {
-  			$category->save();
+
+			Category::create(['name' => $request->name]);
+
   		} catch (QueryException $e) {
   			$error_code = $e->errorInfo[1];
   			if ($error_code == 1062) {

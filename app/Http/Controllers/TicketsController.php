@@ -24,12 +24,23 @@ class TicketsController extends Controller
         return view('tickets.index', compact('tickets'));
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  Ticket  $ticket
+     * @return \Illuminate\Http\Response
+     */
     public function show(Ticket $ticket)
     {
-        
         return view('tickets.show', compact('ticket'));
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  Ticket  $ticket
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Ticket $ticket)
     {
         $this->authorize('manage', $ticket);
@@ -38,6 +49,13 @@ class TicketsController extends Controller
         return view('tickets.edit', ['ticket' => $ticket]);
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  Ticket  $ticket
+     * @param  \Illuminate\Http\Requests\TicketFormRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Ticket $ticket, TicketFormRequest $request)
     {
 
@@ -68,7 +86,12 @@ class TicketsController extends Controller
         return view('tickets.create');
     }
 
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Requests\TicketFormRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(TicketFormRequest $request)
     {
         
@@ -94,6 +117,12 @@ class TicketsController extends Controller
         return redirect('/tickets')->with('status', 'You created tisket successfuly ! Ticket ID is - '. $slug);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  Ticket  $ticket
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(Ticket $ticket)
     {
         $this->authorize('manage', $ticket);

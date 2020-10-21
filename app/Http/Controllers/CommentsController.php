@@ -8,7 +8,15 @@ use App\Http\Requests\CommentFormRequest;
 
 class CommentsController extends Controller
 {
-    public function store(Ticket $ticket, CommentFormRequest $request)
+	
+	/**
+     * Store a newly created resource in storage.
+     *
+	 * @param Ticket $ticket
+     * @param  \Illuminate\Http\Requests\CommentFormRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+	public function store(Ticket $ticket, CommentFormRequest $request)
     {
 
     	$attributes = $request->validated();

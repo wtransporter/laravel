@@ -7,11 +7,16 @@ use Illuminate\Http\Request;
 
 class CategoriesPostsController extends Controller
 {
-    public function index(Category $category)
+
+	/**
+     * Display a listing of the resource.
+     *
+	 * @param Category $category
+     * @return \Illuminate\Http\Response
+     */
+	public function index(Category $category)
     {    	
     	$posts = $category->posts()->with('owner')->paginate(5);
-
-    	//$posts = $category->posts();
 
     	return view('categories_posts.index', [
     			'posts' => $posts,

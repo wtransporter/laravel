@@ -34,6 +34,12 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
+            <li>
+                <form action="/search" class="form-inline" method="GET">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                    <button class="btn btn-outline-primary btn-sm my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </li>
             @guest
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>

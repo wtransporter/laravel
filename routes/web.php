@@ -20,6 +20,8 @@ Route::get('/about', 	'PagesController@about');
 Route::resource('posts', 'PostsController');
 //Route::get('/posts/{post}', 'PostsController@show');
 Route::get('/categories/{category:name}',	'CategoriesPostsController@index');
+Route::get('/search',	'Admin\SearchController@index');
+
 
 Route::group(['middleware' => 'auth'], function () {
 	// Route::get('/tickets', 			'TicketsController@index');
